@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
+ <style type="text/css">
+  body { background: #333; color: #ddd; padding: 10px 50px; }
+  a:link { color: #fc0; text-decoration: none; }
+  a:hover { color: #fff; }
+  a:visited,a:active { color: #f80; }
+ </style>
+
+ <link href="css/keycaster.css" type="text/css" rel="stylesheet" />
+ <script src="js/jquery.keycaster.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ $(document).ready(function(){
+  keycaster({
+  // try changing these options to see the differences
+  showShift   : true,  // Ignore shift key
+  showUnKey   : false, // if true, releasing meta keys will add an "un-" meta key message
+  showBksp    : false  // if true, the backspace key will show
+  });
+ })
+ </script>
+
+</head><body>
+
+<h1><a href="https://github.com/Mottie/Keycaster">Keycaster</a></h1>
+<h3>Keycaster for your browser (version 0.9alpha)</h3>
+A jQuery plugin that adds a keystroke and mouse visualizer to your browser window. Similar to <a href="https://github.com/sdeken/keycastr">keycastr</a> for the mac, except this only works inside the browser window.</h3>
+
+<br>
+
+<h3>Type or click anywhere on the page</h3>
+
+Input:<br>
+<input type="text" />
+
+<br><br>
+
+Text Area:<br>
+<textarea></textarea>
+
+</body></html>

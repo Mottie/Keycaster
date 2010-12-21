@@ -1,0 +1,38 @@
+/* display window */
+#keycaster {
+	list-style: none;
+	width: 500px;
+	text-align: left;
+	background: #222;
+	border: #555 1px solid;
+	border-radius: 1em;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	padding: 20px;
+	position: absolute;
+	right : 10px;
+	top: 10px;
+}
+
+/* all keys */
+.keycasterKey {
+	font-size: 18px;
+	font-weight: 900;
+	padding: .2em .5em;
+	line-height: 2.2em;
+	border: transparent 5px solid;
+	white-space: nowrap;
+}
+
+/* named keys (e.g. Shift, Alt, Insert, etc.) */
+.keycasterKey.namedKeys {
+	border-color: #555;
+	border-radius: .5em;
+	-moz-border-radius: .5em;
+	-webkit-border-radius: .5em;
+}
+
+/* animated png */
+.clickedArea {
+	z-index: 9999;
+}
