@@ -1,4 +1,4 @@
-### Features ([Demo](http://mottie.github.com/keycaster))
+### Features ([Demo](http://mottie.github.com/Keycaster))
 
 * Mouse clicks within the browser window are shown as an animated png.
 * All keys typed within the browser window are shown in a popup display (positioned using CSS).
