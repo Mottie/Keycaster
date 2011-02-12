@@ -2,7 +2,7 @@
 
 * Mouse clicks within the browser window are shown as an animated png.
 * All keys typed within the browser window are shown in a popup display (positioned using CSS).
-* Options are available to show or hide the shift or delete key
+* Options are available to show or hide the shift and/or delete key.
 * Meta (shift, alt and control) keys can be set to show when released.
 
 ### Default Setup
@@ -59,9 +59,13 @@
 			-webkit-border-radius: .5em;
 		}
 
-		/* animated png */
+		/* animated png default z-index */
 		.clickedArea {
 			z-index: 9999;
+		}
+		/* animated png must be under radio buttons & link so they work */
+		.underArea {
+			z-index: -10;
 		}
 
 ### Default Options
@@ -161,8 +165,22 @@
     * Regular keys (keys not found in the keycaster.keys object) will have this class name added to the `keyWrapper`.
     * Default is 'regKeys'.
 
+### Change Log
+
+Version 1.0 beta
+
+* Mapped shifted keys
+* The click animation now occurs on "mouseup" to allow interaction with page elements (links and radio buttons).
+* By default, the click animation occurs above the page elements, but you can now force the animation to occur below these elements by using shift-click.
+* Optimized code to now work with jQuery versions 1.2.6+ (instead of only jQuery 1.4+).
+* Typing the tab key will now start a new line in the display window (previously it only included the enter and escape key).
+* Removed the undefined unicode characters (browser dependent) and replaced them with a short description (mostly in IE).
+
+Version 0.9 alpha
+
+* Initial Commit on Github
+
 ### Todo:
 
-* Map shifted keys.
 * Test with international keyboard.
 * Make this all into a bookmarklet with options.

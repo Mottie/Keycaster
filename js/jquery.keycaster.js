@@ -1,8 +1,9 @@
 /*
- * Keycaster v0.9alpha
+ * Keycaster v1.0beta
  * By Rob Garrison (aka Mottie & Fudgey)
  * Dual licensed under the MIT and GPL licenses.
  *
+ * Dependency: jQuery 1.2.6+
  */
  
 (function($){
@@ -22,26 +23,37 @@
    base.keys = $.extend({}, keycaster.keys, options);
    base.keyset = (base.options.abbrevName) ? 1 : 0;
    base.lasttext = '';
+   base.doc = $(document);
+   base.webkit = $.browser.webkit;
 
    base.$el.hide();
 
-   $(document)
+   base.doc
     .bind('keydown', function(e){
      var k = e.which;
-     // don't repeat meta or menu keys
+     // don't repeat meta or menu keys in the display window
      if (k === base.lastKey && ( k > 15 && k < 19 || k > 90 && k < 94 ) || (!base.options.showShift && k === 16)) { return; }
      base.lastKey = k;
-     // show key
+     // show key (event, key, show-Un-Key)
      base.updateDisplay(e, k, false);
     })
     .bind('mousedown', function(e){
+     if (base.webkit && e.target.tagName === 'SELECT') {
+      // only Safari doesn't show the animation on mouseup, so now Chrome shows both
+      base.rotateImg( e.timeStamp, e.pageX, e.pageY, ((e.shiftKey) ? true : false) );
+     }
+    })
+    .bind('mouseup', function(e){
+     // In case the click image animation interferes with the interface. Set last argument to true by using
+     // Shift-Click to add the "underArea" (negative z-index) class instead of the "clickedArea" class - both are defined in the css
      // show clicked area
-     base.rotateImg(e.timeStamp, e.pageX, e.pageY);
+     base.rotateImg( e.timeStamp, e.pageX, e.pageY, ((e.shiftKey) ? true : false) );
+
     });
 
    // Show key release
    if (base.options.showUnKey) {
-    $(document).bind('keyup', function(e){
+    base.doc.bind('keyup', function(e){
      var k = e.which;
      // show shift, if set
      if (!base.options.showShift && k === 16) { return; }
@@ -63,39 +75,38 @@
    base.timer = setTimeout(base.clearDisplay, base.options.displayTime);
    base.$el.show();
 
-   // console.debug(k);
-
-   var def = typeof(base.keys[k]) !== 'undefined',
+   var key = base.keys[k],
+    def = typeof(key) !== 'undefined',
     meta = ( e.ctrlKey || e.altKey ),
     t = (e.shiftKey) ? String.fromCharCode(e.keyCode) : String.fromCharCode(e.keyCode).toLowerCase(),
-    n = '<' + base.options.keyWrapper + ' class="keycasterKey ';
-
-   n += (meta || def) ? base.options.namedKey : base.options.regKey;
-   n += '">';
+    n = $('<' + base.options.keyWrapper + '/>')
+     .addClass('keycasterKey ' + ((meta || def) ? base.options.namedKey : base.options.regKey));
+   // console.debug(k + ': ' + key);
    if (def) {
     t = (un) ? base.options.unMessage : ''; // for un-shift, un-ctrl, un-alt
-    t += base.keys[k][base.keyset];
+    t += (e.shiftKey) ? key[2] || key[base.keyset] : key[base.keyset];
    }
-   n += t + '</' + base.options.keyWrapper + '>';
+   n.html(t);
 
+   // backspace
    if (!base.options.showBksp && k === 8){
     base.$el.find(base.options.keyWrapper + ':last').remove();
-    n = '';
+    n = null;
    }
 
    // add <li> if one isn't available
    if (base.$el.find('li').length === 0) {
     base.$el.append('<li><span></span></li>');
    }
-   base.$el.find('li:last > span').html(function(i,h){ return h + n; });
+   base.$el.find('li:last > span').append(n); //.html(function(i,h){ return h + n; });
 
    // move key to next line if it gets too wide
    if (base.$el.find('li:last > span').outerWidth() > base.$el.find('li:last').innerWidth()) {
     base.$el.find('li:last > span').find(base.options.keyWrapper + ':last').remove();
-    base.$el.append('<li><span>' + n + '</span></li>');
+    base.$el.append('<li><span></span></li>').find('li:last > span').append(n);
    }
-   // add new line after each enter or escape
-   if (k === 13 || k === 27) { base.$el.append('<li><span></span></li>'); }
+   // add new line after each enter, escape or tab (expecting it to switch inputs)
+   if (k === 13 || k === 27 || k === 9) { base.$el.append('<li><span></span></li>'); }
 
    if (base.$el.find('li').length > base.options.lines) {
     base.$el.find('li:first').remove();
@@ -114,10 +125,11 @@
   };
 
   // Animate png image
-  base.rotateImg = function(imgId,x,y){
+  base.rotateImg = function(imgId,x,y,under){
    // add image
    if (!$('#clicked' + imgId).length) {
-    $('<div class="clickedArea" id="clicked' + imgId + '" data-num="0"></div>')
+    $('<div id="clicked' + imgId + '" data-num="0"></div>')
+     .addClass( (under) ? 'underArea' : 'clickedArea' )
      .css({
       background : 'transparent url(' + base.options.imgUrl + ') no-repeat 0 0',
       height     : base.options.imgsize,
@@ -166,19 +178,19 @@
   regKey      : 'regKeys'                // un-named key class
  };
 
-  keycaster.keys = {
-  // e.which : [ 'full key name', 'abbreviated name' ]
-  8   : [ 'Backspace', '\u232b' ],
+ keycaster.keys = {
+  // e.which : [ 'full key name', 'abbreviated name', 'shifted key' ]
+  8   : [ 'Backspace', ($.browser.msie ? 'Bksp' : '\u232b') ],
   9   : [ 'Tab', '\u21b9' ],
-  12  : [ 'Numpad 5' , '5' ],
+  12  : [ 'Numpad 5' , '5' ], // shifted numpad 5
   13  : [ 'Enter', '\u21b5' ],
   16  : [ 'Shift', '\u21e7' ],
   17  : [ 'Control', '\u273c' ], // Ctrl symbol - 6 spoked open center asterisk
-  18  : [ 'Alt', '\u2325' ],
-  19  : [ 'Pause', 'Pause' ],
+  18  : [ 'Alt', ($.browser.msie ? 'Alt' : '\u2325') ],
+  19  : [ 'Break', 'Break', 'Pause' ],
   20  : [ 'Caps Lock', '\u21ea' ],
   27  : [ 'Escape', 'Esc' ],
-  32  : [ 'Space', '_' ],
+  32  : [ 'Space', '&nbsp;' ],
   33  : [ 'Page Up', 'PgUp' ],
   34  : [ 'Page Down', 'PgDwn' ],
   35  : [ 'End', 'End' ],
@@ -190,10 +202,20 @@
   44  : [ 'Print Screen', 'PrtScn' ],
   45  : [ 'Insert', 'Ins' ],
   46  : [ 'Delete', 'Del' ],
-  // \u2318 = mac command, \u2317 = viewdata square, there is no unicode symbol for windows
-  91  : [ 'Command (left)', ((navigator.appVersion.indexOf("Mac")!== -1) ? '\u2318' : '\u2317') ],  // these symbols do not work in IE
-  92  : [ 'Command (right)', ((navigator.appVersion.indexOf("Mac")!== -1) ? '\u2318' : '\u2317') ], // these symbols do not work in IE
-  93  : [ 'Menu', '\u29c9' ], // symbol two joined squares - does not work in IE
+  48  : [ '0', '0', ')' ],
+  49  : [ '1', '1', '!' ],
+  50  : [ '2', '2', '@' ],
+  51  : [ '3', '3', '#' ],
+  52  : [ '4', '4', '$' ],
+  53  : [ '5', '5', '%' ],
+  54  : [ '6', '6', '^' ],
+  55  : [ '7', '7', '&amp;' ],
+  56  : [ '8', '8', '*' ],
+  57  : [ '9', '9', '(' ],
+  59  : [ ';', ';', ':' ],
+  91  : [ 'Command (left)', ((navigator.appVersion.indexOf("Mac")!== -1) ? '\u2318' : 'Win') ],  // \u2318 = mac command
+  92  : [ 'Command (right)', ((navigator.appVersion.indexOf("Mac")!== -1) ? '\u2318' : 'Win') ], // \u2318 = mac command
+  93  : [ 'Menu Select', 'Sel' ], // Same as right click in Windows
   96  : [ 'Numpad 0', '0'],
   97  : [ 'Numpad 1', '1'],
   98  : [ 'Numpad 2', '2'],
@@ -205,37 +227,37 @@
   104 : [ 'Numpad 8', '8'],
   105 : [ 'Numpad 9', '9'],
   106 : [ 'Multiply', '*' ],
-  107 : [ 'Add', '+' ],
-  108 : [ 'Numpad Enter', '\u21b5' ],
-  109 : [ 'Subtract', '-' ],
-  110 : [ 'Numpad Decimal', '.' ],
+  107 : [ '=', '=', '+' ],
+  108 : [ 'Numpad Enter', '\u21b5' ], // not in firefox (it's 13)
+  109 : [ 'Subtract', '-', '_' ],
+  110 : [ 'Numpad Decimal', '.' ], // not in Firefox (it's 46)
   111 : [ 'Divide', '/' ],
-  112 : [ 'Help', 'F1' ], // Doubt this will work since the browser opens the help site
+  112 : [ 'Help (F1)', 'F1' ], // Doubt this will work since the browser opens the help site
   113 : [ 'F2', 'F2' ],
   114 : [ 'F3', 'F3' ],
   115 : [ 'F4', 'F4' ],
-  116 : [ 'Reload', 'F5' ], // Reload page
+  116 : [ 'Reload (F5)', 'F5' ], // Reload page
   117 : [ 'F6', 'F6' ], // Next pane
   118 : [ 'F7', 'F7' ],
   119 : [ 'F8', 'F8' ],
   120 : [ 'F9', 'F9' ],
   121 : [ 'F10', 'F10' ],
-  122 : [ 'Full Screen', 'F11' ], // Browser full screen mode
+  122 : [ 'Full Screen (F11)', 'F11' ], // Browser full screen mode
   123 : [ 'F12', 'F12' ],
   144 : [ 'Num Lock', 'NmLk' ],
   145 : [ 'Scroll Lock', 'ScrLk' ],
-  186 : [ ';', ';' ],
-  187 : [ '=', '=' ],
-  188 : [ 'Comma', ',' ],
-  189 : [ '-', '-' ],
-  190 : [ 'Period', '.' ],
-  191 : [ '/', '/' ],
-  192 : [ '`', '`' ],
-  193 : [ '~', '~' ],
-  219 : [ '[', '[' ],
-  220 : [ '\\', '\\'],
-  221 : [ ']', ']'],
-  222 : [ "'", "'" ] // apostrophe
+  186 : [ ';', ';', ':' ], // IE
+  187 : [ '=', '=', '+' ], // IE
+  188 : [ 'Comma', ',', '&lt;' ],
+  189 : [ 'Dash', '-', '_' ], // IE
+  190 : [ 'Period', '.', '&gt;' ],
+  191 : [ '/', '/', '?' ],
+  192 : [ '`', '`', '~' ],
+  193 : [ '~', '~' ], // which browser/keyboard/os does this work on?
+  219 : [ '[', '[', '{' ],
+  220 : [ '\\', '\\', '|'],
+  221 : [ ']', ']', '}'],
+  222 : [ "'", "'", '&quot;' ] // apostrophe/single quote
  };
 
 })(jQuery);

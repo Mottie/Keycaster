@@ -32,7 +32,11 @@
 	-webkit-border-radius: .5em;
 }
 
-/* animated png */
+/* animated png default z-index */
 .clickedArea {
 	z-index: 9999;
+}
+/* animated png must be under radio buttons & link so they work */
+.underArea {
+	z-index: -10;
 }

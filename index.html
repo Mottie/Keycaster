@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 
- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
  <style type="text/css">
   body { background: #333; color: #ddd; padding: 10px 50px; }
@@ -15,23 +15,25 @@
  <script type="text/javascript">
  $(document).ready(function(){
   keycaster({
-  // try changing these options to see the differences
-  showShift   : true,  // Ignore shift key
-  showUnKey   : false, // if true, releasing meta keys will add an "un-" meta key message
-  showBksp    : false  // if true, the backspace key will show
+   // try changing these options to see the differences
+   showShift   : true,  // Ignore shift key
+   showUnKey   : false, // if true, releasing meta keys will add an "un-" meta key message
+   showBksp    : true,  // if true, the backspace key will show
+   imgUrl      : 'images/click-blue.png' // replace "blue" with "red", "green", "blue", "white", "grey" or "black" to see other colors
   });
- })
+ });
  </script>
 
 </head><body>
 
 <h1><a href="https://github.com/Mottie/Keycaster">Keycaster</a></h1>
-<h3>Keycaster for your browser (version 0.9alpha)</h3>
-A jQuery plugin that adds a keystroke and mouse visualizer to your browser window. Similar to <a href="https://github.com/sdeken/keycastr">keycastr</a> for the mac, except this only works inside the browser window.</h3>
+<h3>Keycaster for your browser (version 1.0beta)</h3>
+A jQuery plugin that adds a keystroke and mouse visualizer to your browser window. Similar to <a href="https://github.com/sdeken/keycastr">keycastr</a> application for the mac, except this only works inside the browser window.</h3>
 
 <br>
 
 <h3>Type or click anywhere on the page</h3>
+<ul><li>If the click animation seen on mouseup interferes with any page elements, use "shift-click" to force the animation to occur under the element.</li></ul>
 
 Input:<br>
 <input type="text" />
@@ -40,5 +42,26 @@ Input:<br>
 
 Text Area:<br>
 <textarea></textarea>
+
+<br><br>
+<hr>
+
+* Note: On the select box below, Safari will only show mouse click animation on mousedown and since there isn't a way to differentiate Chrome & Safari, Chrome will show animation on both mousedown &amp; mouseup.
+
+<br><br>
+
+Radio:<br>
+<input type="radio" name="test" checked />
+<input type="radio" name="test" />
+<input type="radio" name="test" />
+
+<br><br>
+
+Select:<br>
+<select>
+ <option>Option 1</option>
+ <option>Option 2</option>
+ <option>Option 3</option>
+</select>
 
 </body></html>
