@@ -167,6 +167,10 @@
 
 ### Change Log
 
+Version 1.1.2
+
+* Fixed script loading problem (moved jQuery.noConflict() statement) so now it only takes one click to open the options panel.
+
 Version 1.1.1
 
 * Added missing color css.

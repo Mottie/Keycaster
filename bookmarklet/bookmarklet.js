@@ -7,18 +7,9 @@
  */
 
 (function($){
-	// Get script - keycasterfiles is a global variable set in the bookmarklet and
+	// Add options panel and setup keycaster - keycasterfiles is a global variable set in the bookmarklet and
 	// it points to the domain where the keycaster files are hosted.
-	var getScript = function(url){
-		if (!$('script[src*="' + url.replace('.min','') + '"]').length) {
-			var script = document.createElement('script');
-			script.src = keycasterfiles + url;
-			script.type = 'text/javascript';
-			document.getElementsByTagName('head')[0].appendChild(script);
-		}
-	},
-	// add options panel and setup keycaster
-	init = function(){
+	var init = function(){
 		// start plugin
 		keycaster({imgUrl : keycasterfiles + 'images/click-blue.png'});
 
@@ -78,18 +69,15 @@
 	// global variable - initialization flag
 	keycasterbookmarklet = false;
 
-	// Load Keycaster
-	getScript('js/jquery.keycaster.js');
-
 	// run when loaded
 	(function check(){
 		if (typeof jQuery !== 'function' || typeof keycaster !== 'function'){
 			setTimeout(function(){ check(); }, 100);
 		} else if (!keycasterbookmarklet) {
 			keycasterbookmarklet = true;
+			jQuery.noConflict();
 			init();
 		}
 	})();
 
 })(jQuery);
-
