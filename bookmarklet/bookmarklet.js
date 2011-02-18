@@ -20,7 +20,7 @@
 	// add options panel and setup keycaster
 	init = function(){
 		// start plugin
-		keycaster();
+		keycaster({imgUrl : keycasterfiles + 'images/click-blue.png'});
 
 		// add option panel html
 		$('body').append('' +
