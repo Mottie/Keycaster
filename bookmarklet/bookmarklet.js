@@ -72,7 +72,7 @@
 			var t, opt = $('#keycaster').data('key').options;
 			$.each('abbrevName showShift showBksp showUnKey unMessage imgUrl lines displayTime'.split(' '), function(i,o){
 				t = kc.find('.kc-'+o);
-				opt[o] = (i<4) ? t.is(':checked') : (i===5) ? 'images/click-' + t.val() + '.png' : t.val();
+				opt[o] = (i<4) ? t.is(':checked') : (i===5) ? files + 'images/click-' + t.val() + '.png' : t.val();
 			});
 		});
 
