@@ -167,6 +167,12 @@
 
 ### Change Log
 
+Version 1.1.1
+
+* Added missing color css.
+* Changed a bunch of css class names to lessen the chance of interference.
+* Set jQuery noConflict mode if script needs to load jQuery.
+
 Version 1.1
 
 * Added bookmarklet code, so you can now use this plugin without needing to install it on your site.
@@ -189,4 +195,5 @@ Version 0.9 alpha
 
 ### Todo:
 
+* Figure out how to make the bookmarklet option panel and keycaster window be above YouTube videos ( they don't have wmode set =/ )
 * Test with international keyboard (if I ever get one).

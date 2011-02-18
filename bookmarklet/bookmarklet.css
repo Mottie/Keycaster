@@ -2,9 +2,9 @@
  * Keycaster Bookmarklet CSS
  */
 
-.kc-wrap {
+.keycaster-wrap {
 	height : 180px;
-	width : 180px;
+	width : 190px;
 	z-index : 1001;
 	font-size : 12px;
 	color : #222;
@@ -18,33 +18,33 @@
 	top : 10px;
 }
 
-.kc-wrap tr, .kc-wrap td, .kc-wrap input, .kc-wrap select {
+.keycaster-wrap tr, .keycaster-wrap td, .keycaster-wrap input, .keycaster-wrap select {
 	padding: 0;
 	margin: 0 0 0 2px;
 }
 
-.kc-close {
+.keycaster-close {
 	float : right;
 	font-size : 18px;
 	font-weight : 700;
 	cursor : pointer;
 }
 
-.kc-hdr {
+.keycaster-hdr {
 	font-size : 18px;
 	font-weight : 700;
 	color : #008;
 }
 
-.kc-wrap td.kc-leftPad {
+.keycaster-wrap td.keycaster-leftPad {
 	padding-left : 20px;
 }
 
-.kc-imgUrl {
+.keycaster-imgUrl {
 	float : right;
 }
 
-.kc-unMessage, .kc-lines, .kc-displayTime {
+.keycaster-unMessage, .keycaster-lines, .keycaster-displayTime {
 	width : 40px;
 	float : right;
 	line-height: 18px;

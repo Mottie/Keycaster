@@ -1,5 +1,5 @@
 /*
- * Keycaster v1.1
+ * Keycaster v1.1.1
  * By Rob Garrison (aka Mottie & Fudgey)
  * Dual licensed under the MIT and GPL licenses.
  *
@@ -45,7 +45,7 @@
     })
     .bind('mouseup', function(e){
      // In case the click image animation interferes with the interface. Set last argument to true by using
-     // Shift-Click to add the "underArea" (negative z-index) class instead of the "clickedArea" class - both are defined in the css
+     // Shift-Click to add the "keycasterUnderArea" (negative z-index) class instead of the "keycasterClickedArea" class - both are defined in the css
      // show clicked area
      base.rotateImg( e.timeStamp, e.pageX, e.pageY, ((e.shiftKey) ? true : false) );
     });
@@ -129,7 +129,7 @@
    // add image
    if (!$('#clicked' + imgId).length) {
     $('<div id="clicked' + imgId + '" data-num="0"></div>')
-     .addClass( (under) ? 'underArea' : 'clickedArea' )
+     .addClass( (under) ? 'keycasterUnderArea' : 'keycasterClickedArea' )
      .css({
       background : 'transparent url(' + base.options.imgUrl + ') no-repeat 0 0',
       height     : base.options.imgsize,

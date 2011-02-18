@@ -4,6 +4,7 @@
 	width : 500px;
 	text-align : left;
 	background : #222;
+	color: #ddd;
 	border : #555 1px solid;
 	border-radius : 1em;
 	-moz-border-radius : 1em;
@@ -15,7 +16,7 @@
 }
 
 /* all keys */
-.keycasterKey {
+#keycaster .keycasterKey {
 	font-size : 18px;
 	font-weight : 900;
 	padding : .2em .5em;
@@ -25,7 +26,7 @@
 }
 
 /* named keys (e.g. Shift, Alt, Insert, etc.) */
-.keycasterKey.namedKeys {
+#keycaster .keycasterKey.namedKeys {
 	border-color : #555;
 	border-radius : .5em;
 	-moz-border-radius : .5em;
@@ -33,10 +34,10 @@
 }
 
 /* animated png default z-index */
-.clickedArea {
+.keycasterClickedArea {
 	z-index : 9999;
 }
 /* animated png must be under radio buttons & link so they work */
-.underArea {
+.keycasterUnderArea {
 	z-index : -10;
 }
