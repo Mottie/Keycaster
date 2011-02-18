@@ -167,6 +167,12 @@
 
 ### Change Log
 
+Version 1.1
+
+* Added bookmarklet code, so you can now use this plugin without needing to install it on your site.
+* Rearrange some code to better work with the bookmarklet option panel.
+* Fixed the keycaster window so it's visible while scrolling the page (duh!).
+
 Version 1.0 beta
 
 * Mapped shifted keys
@@ -175,6 +181,7 @@ Version 1.0 beta
 * Optimized code to now work with jQuery versions 1.2.6+ (instead of only jQuery 1.4+).
 * Typing the tab key will now start a new line in the display window (previously it only included the enter and escape key).
 * Removed the undefined unicode characters (browser dependent) and replaced them with a short description (mostly in IE).
+* Added black and white click images.
 
 Version 0.9 alpha
 
@@ -182,5 +189,4 @@ Version 0.9 alpha
 
 ### Todo:
 
-* Test with international keyboard.
-* Make this all into a bookmarklet with options.
+* Test with international keyboard (if I ever get one).

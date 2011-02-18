@@ -1,42 +1,42 @@
 /* display window */
 #keycaster {
-	list-style: none;
-	width: 500px;
-	text-align: left;
-	background: #222;
-	border: #555 1px solid;
-	border-radius: 1em;
-	-moz-border-radius: 1em;
-	-webkit-border-radius: 1em;
-	padding: 20px;
-	position: absolute;
+	list-style : none;
+	width : 500px;
+	text-align : left;
+	background : #222;
+	border : #555 1px solid;
+	border-radius : 1em;
+	-moz-border-radius : 1em;
+	-webkit-border-radius : 1em;
+	padding : 20px;
+	position : fixed;
 	right : 10px;
-	top: 10px;
+	top : 10px;
 }
 
 /* all keys */
 .keycasterKey {
-	font-size: 18px;
-	font-weight: 900;
-	padding: .2em .5em;
-	line-height: 2.2em;
-	border: transparent 5px solid;
-	white-space: nowrap;
+	font-size : 18px;
+	font-weight : 900;
+	padding : .2em .5em;
+	line-height : 2.2em;
+	border : transparent 5px solid;
+	white-space : nowrap;
 }
 
 /* named keys (e.g. Shift, Alt, Insert, etc.) */
 .keycasterKey.namedKeys {
-	border-color: #555;
-	border-radius: .5em;
-	-moz-border-radius: .5em;
-	-webkit-border-radius: .5em;
+	border-color : #555;
+	border-radius : .5em;
+	-moz-border-radius : .5em;
+	-webkit-border-radius : .5em;
 }
 
 /* animated png default z-index */
 .clickedArea {
-	z-index: 9999;
+	z-index : 9999;
 }
 /* animated png must be under radio buttons & link so they work */
 .underArea {
-	z-index: -10;
+	z-index : -10;
 }

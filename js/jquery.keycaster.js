@@ -1,5 +1,5 @@
 /*
- * Keycaster v1.0beta
+ * Keycaster v1.1
  * By Rob Garrison (aka Mottie & Fudgey)
  * Dual licensed under the MIT and GPL licenses.
  *
@@ -19,9 +19,9 @@
   base.$el.data("key", base);
   
   base.init = function(){
+   if (base.initialized) { return; }
    base.options = $.extend({}, keycaster.defaultOptions, options);
    base.keys = $.extend({}, keycaster.keys, options);
-   base.keyset = (base.options.abbrevName) ? 1 : 0;
    base.lasttext = '';
    base.doc = $(document);
    base.webkit = $.browser.webkit;
@@ -48,24 +48,24 @@
      // Shift-Click to add the "underArea" (negative z-index) class instead of the "clickedArea" class - both are defined in the css
      // show clicked area
      base.rotateImg( e.timeStamp, e.pageX, e.pageY, ((e.shiftKey) ? true : false) );
-
     });
 
    // Show key release
-   if (base.options.showUnKey) {
-    base.doc.bind('keyup', function(e){
+   base.doc.bind('keyup', function(e){
+    if (base.options.showUnKey) {
      var k = e.which;
-     // show shift, if set
-     if (!base.options.showShift && k === 16) { return; }
-     // show un-meta key, except for menu
-     if ( k > 15 && k < 19 || k > 90 && k < 93 ) {
-      base.lastKey = null;
-      // show key
-      base.updateDisplay(e, k, true);
-     }
-    });
-   }
-
+      // show shift, if set
+      if (!base.options.showShift && k === 16) { return; }
+      // show un-meta key, except for menu
+      if ( k > 15 && k < 19 || k > 90 && k < 93 ) {
+       base.lastKey = null;
+       // show key
+       base.updateDisplay(e, k, true);
+      }
+    }
+   });
+   // prevent multiple instances
+   base.initialized = true;
   };
 
   // display key (event, event.which, "un"-boolean)
@@ -76,15 +76,15 @@
    base.$el.show();
 
    var key = base.keys[k],
+    set = (base.options.abbrevName) ? 1 : 0,
     def = typeof(key) !== 'undefined',
     meta = ( e.ctrlKey || e.altKey ),
     t = (e.shiftKey) ? String.fromCharCode(e.keyCode) : String.fromCharCode(e.keyCode).toLowerCase(),
     n = $('<' + base.options.keyWrapper + '/>')
      .addClass('keycasterKey ' + ((meta || def) ? base.options.namedKey : base.options.regKey));
-   // console.debug(k + ': ' + key);
    if (def) {
     t = (un) ? base.options.unMessage : ''; // for un-shift, un-ctrl, un-alt
-    t += (e.shiftKey) ? key[2] || key[base.keyset] : key[base.keyset];
+    t += (e.shiftKey) ? key[2] || key[set] : key[set];
    }
    n.html(t);
 
@@ -98,7 +98,7 @@
    if (base.$el.find('li').length === 0) {
     base.$el.append('<li><span></span></li>');
    }
-   base.$el.find('li:last > span').append(n); //.html(function(i,h){ return h + n; });
+   base.$el.find('li:last > span').append(n);
 
    // move key to next line if it gets too wide
    if (base.$el.find('li:last > span').outerWidth() > base.$el.find('li:last').innerWidth()) {

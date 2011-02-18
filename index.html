@@ -27,13 +27,32 @@
 </head><body>
 
 <h1><a href="https://github.com/Mottie/Keycaster">Keycaster</a></h1>
-<h3>Keycaster for your browser (version 1.0beta)</h3>
-A jQuery plugin that adds a keystroke and mouse visualizer to your browser window. Similar to <a href="https://github.com/sdeken/keycastr">keycastr</a> application for the mac, except this only works inside the browser window.</h3>
+<h2>Keycaster for your browser (version 1.1)</h2>
+ A jQuery plugin that adds a keystroke and mouse visualizer to your browser window. Similar to <a href="https://github.com/sdeken/keycastr">keycastr</a> application for the mac, except this only works inside the browser window.
 
 <br>
+<h2>Features</h2>
+<ul>
+ <li>Works with jQuery versions 1.2+.</li>
+ <li>Keycaster will show all typed keys when the browser window has focus.</li>
+ <li>Mouse clicks anywhere inside the browser viewport will be visualized. Different colors (blue, black, green, grey, red &amp; white) provided.</li>
+ <li>If the click animation seen on mouseup interferes with any page elements, use "shift-click" to force the animation to occur under the element.</li>
+ <li>Download and install this plugin on your site to always have this feature available.</li>
+ <li>Or, just use the Bookmarklet:
+  <ul>
+   <li>This bookmarklet will allow you to use Keycaster on any site without needing to install it.</li>
+   <!-- change the url in the files variable here and in the bookmarklet.js, if you want to point to your own domain -->
+   <li>Drag this bookmarklet (<a href="javascript:(function(){var%20files='http://mottie.github.com/Keycaster/';getScript=function(url){var%20script=document.createElement('script');script.src=url;document.getElementsByTagName('head')[0].appendChild(script)};if(typeof%20jQuery==='undefined'){getScript('http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js')}if(typeof%20kc_bookmarklet==='undefined'){getScript(files+'bookmarklet/bookmarklet.js')}else{$('.kc-wrap').show()}})();">Keycaster</a>) into your browser bookmarks and just click on it when you need it.</li>
+   <li>Once loaded, click the bookmarklet again or type Shift-F1 to open the options panel.</li>
+   <li>Pressing escape or clicking the "x" in the upper right corner will close the options panel.</li>
+  </ul>
+ </li>
+</ul>
 
-<h3>Type or click anywhere on the page</h3>
-<ul><li>If the click animation seen on mouseup interferes with any page elements, use "shift-click" to force the animation to occur under the element.</li></ul>
+<h2>Demo</h2>
+Type or click anywhere on the page
+
+<br><br>
 
 Input:<br>
 <input type="text" />
@@ -44,11 +63,7 @@ Text Area:<br>
 <textarea></textarea>
 
 <br><br>
-<hr>
 
-* Note: On the select box below, Safari will only show mouse click animation on mousedown and since there isn't a way to differentiate Chrome & Safari, Chrome will show animation on both mousedown &amp; mouseup.
-
-<br><br>
 
 Radio:<br>
 <input type="radio" name="test" checked />
@@ -63,5 +78,13 @@ Select:<br>
  <option>Option 2</option>
  <option>Option 3</option>
 </select>
+
+<br><br>
+
+<hr>
+
+<ul>
+ <li>Note: When clicking on the select box above, Safari will only show mouse click animation on mousedown and since there isn't a way to differentiate Chrome & Safari, Chrome will show animation on both mousedown &amp; mouseup.</li>
+</ul>
 
 </body></html>
