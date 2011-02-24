@@ -20,7 +20,7 @@
 		'<div class="keycaster-wrap">' +
 			'<div class="keycaster-close" title="shortcut key: Escape">x</div>' +
 			'<div class="keycaster-hdr">Keycaster Settings</div>' +
-			'(Use Shift-F1 to re-open this panel)' +
+			'<div class="keycaster-msg">(Use Shift-F1 to re-open this panel)</div>' +
 			'<div style="height:8px;"></div>' +
 			'<table width="100%" cellpadding=0 cellspacing=0>' +
 			'<tr><td colspan=2><input class="keycaster-abbrevName" type="checkbox" checked="checked" /> Abbreviated Names</td></tr>' +

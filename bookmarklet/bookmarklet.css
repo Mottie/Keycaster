@@ -3,49 +3,54 @@
  */
 
 .keycaster-wrap {
-	height : 180px;
-	width : 190px;
-	z-index : 1001;
-	font-size : 12px;
-	color : #222;
-	background : #ccc;
-	border-radius : .5em;
-	-moz-border-radius : .5em;
-	-webkit-border-radius : .5em;
-	padding : 10px;
-	position : fixed;
-	left : 10px;
-	top : 10px;
+	height: 185px;
+	width: 190px;
+	z-index: 1001;
+	font: 12px helvetica,arial,freesans,clean,sans-serif;
+	color: #222;
+	background: #ccc;
+	border-radius: .5em;
+	-moz-border-radius: .5em;
+	-webkit-border-radius: .5em;
+	padding: 10px;
+	position: fixed;
+	left: 10px;
+	top: 10px;
 }
 
-.keycaster-wrap tr, .keycaster-wrap td, .keycaster-wrap input, .keycaster-wrap select {
+.keycaster-wrap .keycaster-msg, .keycaster-wrap tr, .keycaster-wrap td, .keycaster-wrap input, .keycaster-wrap select {
+	background: #ccc;
+	color: #222;
+	font: 12px helvetica,arial,freesans,clean,sans-serif;
 	padding: 0;
 	margin: 0 0 0 2px;
 }
 
-.keycaster-close {
-	float : right;
-	font-size : 18px;
-	font-weight : 700;
-	cursor : pointer;
+.keycaster-wrap .keycaster-close {
+	float: right;
+	font: 700 14px helvetica,arial,freesans,clean,sans-serif;
+	cursor: pointer;
 }
 
-.keycaster-hdr {
-	font-size : 18px;
-	font-weight : 700;
-	color : #008;
+.keycaster-wrap .keycaster-hdr {
+	font: 700 15px helvetica,arial,freesans,clean,sans-serif;
+	color: #008;
 }
 
 .keycaster-wrap td.keycaster-leftPad {
-	padding-left : 20px;
+	padding-left: 20px;
 }
 
-.keycaster-imgUrl {
-	float : right;
+.keycaster-wrap input, .keycaster-wrap select {
+	background: #fff;
 }
 
-.keycaster-unMessage, .keycaster-lines, .keycaster-displayTime {
-	width : 40px;
-	float : right;
+.keycaster-wrap .keycaster-imgUrl {
+	float: right;
+}
+
+.keycaster-wrap .keycaster-unMessage, .keycaster-wrap .keycaster-lines, .keycaster-wrap .keycaster-displayTime {
+	width: 40px;
+	float: right;
 	line-height: 18px;
 }

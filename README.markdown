@@ -4,6 +4,7 @@
 * All keys typed within the browser window are shown in a popup display (positioned using CSS).
 * Options are available to show or hide the shift and/or delete key.
 * Meta (shift, alt and control) keys can be set to show when released.
+* Drag the bookmarklet (on the demo page) to your browser bookmarks to add keycaster to any page without installing the plugin.
 
 ### Default Setup
 
@@ -166,6 +167,10 @@
     * Default is 'regKeys'.
 
 ### Change Log
+
+Version 1.1.3
+
+* Modified bookmarklet settings popup css to be more independent of page styling.
 
 Version 1.1.2
 
